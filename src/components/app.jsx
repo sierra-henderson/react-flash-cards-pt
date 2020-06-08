@@ -15,6 +15,7 @@ export default class App extends React.Component {
     }
     this.setView = this.setView.bind(this)
     this.getView = this.getView.bind(this)
+    this.addCard = this.addCard.bind(this)
   }
 
   setView(view) {
@@ -27,7 +28,7 @@ export default class App extends React.Component {
         return (
         <AppContext.Provider value={this.addCard}>
           <CreateCard />;
-          </AppContext.Provider>
+        </AppContext.Provider>
         )
       case 'review-cards':
         return <ReviewCards />;
@@ -52,12 +53,12 @@ export default class App extends React.Component {
   render() {
     console.log(this.state.cards)
     return (
-      <AppContext.Provider value={this.state}>
         <div>
           <Nav setView={this.setView} />
           {this.getView()}
         </div>
-      </AppContext.Provider>
     )
   }
 }
+
+export { AppContext }
