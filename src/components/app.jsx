@@ -2,6 +2,7 @@ import React from 'react'
 import ViewCards from './view-cards'
 import ReviewCards from './review-cards'
 import CreateCard from './create-card'
+import Nav from './nav'
 
 const AppContext = React.createContext()
 
@@ -22,7 +23,7 @@ export default class App extends React.Component {
       case 'create-card':
         return <CreateCard />;
       case 'review-cards':
-        return <Review />;
+        return <ReviewCards />;
       case 'view-cards':
         return <ViewCards />;
       default:
