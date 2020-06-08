@@ -34,6 +34,7 @@ export default class App extends React.Component {
     return (
       <AppContext.Provider value={this.state.view}>
         <div>
+          <Nav setView={this.setView} />
           {this.getView()}
         </div>
       </AppContext.Provider>

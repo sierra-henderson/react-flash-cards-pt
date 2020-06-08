@@ -5,13 +5,13 @@ export default class Nav extends React.Component {
     return (
       <ul class="nav nav-pills justify-content-end">
         <li class="nav-item">
-          <a class="nav-link active" href="#">View Cards</a>
+          <a class="nav-link active" onClick={() => this.props.setView("view-cards")} href="#">View Cards</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Review</a>
+          <a class="nav-link" onClick={() => this.props.setView("review-cards")} href="#">Review</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Create Card</a>
+          <a class="nav-link" onClick={() => this.props.setView("view-cards")} href="#">Create Card</a>
         </li>
       </ul>
     )
