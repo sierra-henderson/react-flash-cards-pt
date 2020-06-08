@@ -34,6 +34,11 @@ export default class App extends React.Component {
     }
   }
 
+  saveCards() {
+    const cardsString = JSON.stringify(this.state.cards)
+    localStorage.setItem('flash-cards', cardsString)
+  }
+
   render() {
     console.log(this.state.cards)
     return (
