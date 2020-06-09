@@ -36,12 +36,12 @@ export default class App extends React.Component {
       case 'review-cards':
         return (
           <AppContext.Provider value={this.state.activeCard}>
-            <ReviewCards />
+            <ReviewCards setActiveCard={this.setActiveCard}/>
           </AppContext.Provider>
         )
       case 'view-cards':
         return (
-          <AppContext.Provider value={cards: this.state.cards, setActiveCard: this.setActiveCard}>
+          <AppContext.Provider value={this.state.cards}>
             <ViewCards />
           </AppContext.Provider>
         )
