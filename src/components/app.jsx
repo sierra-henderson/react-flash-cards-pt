@@ -35,7 +35,7 @@ export default class App extends React.Component {
         )
       case 'review-cards':
         return (
-          <AppContext.Provider value={this.state.activeCard}>
+          <AppContext.Provider value={{activeCard: this.state.activeCard, cards: this.state.cards}}>
             <ReviewCards setActiveCard={this.setActiveCard}/>
           </AppContext.Provider>
         )

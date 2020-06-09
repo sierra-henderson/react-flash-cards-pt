@@ -11,6 +11,14 @@ export default class ReviewCards extends React.Component {
     this.props.setActiveCard(0)
   }
 
+  nextCard(value) {
+    if (value.activeCard === value.cards.length - 1) {
+      this.props.setActiveCard(0)
+    } else {
+      this.props.setActiveCard(value++)
+    }
+  }
+
   render() {
     return (
       <AppContext.Consumer>
