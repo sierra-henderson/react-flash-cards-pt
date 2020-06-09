@@ -6,7 +6,7 @@ export default class ViewCards extends React.Component {
     return (
       <AppContext.Consumer>
         {value => (
-          <div>
+          <div className="container">
             <h1 className="text-center mb-4">My Cards</h1>
             <div className="row row-cols-md-3">
               {
