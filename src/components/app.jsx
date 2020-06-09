@@ -34,7 +34,11 @@ export default class App extends React.Component {
       case 'review-cards':
         return <ReviewCards />;
       case 'view-cards':
-        return <ViewCards />;
+        return (
+          <AppContext.Provider value={this.state.cards}>
+            <ViewCards />
+          </AppContext.Provider>
+        )
       default:
         return null;
     }
