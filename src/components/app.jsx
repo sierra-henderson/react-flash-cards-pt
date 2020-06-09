@@ -11,7 +11,8 @@ export default class App extends React.Component {
     super(props)
     this.state = {
       view: 'view-cards',
-      cards: localStorage.getItem('flash-cards') ? JSON.parse(localStorage.getItem('flash-cards')) : []
+      cards: localStorage.getItem('flash-cards') ? JSON.parse(localStorage.getItem('flash-cards')) : [],
+      activeCard: this.state.cards[0]
     }
     this.setView = this.setView.bind(this)
     this.getView = this.getView.bind(this)
@@ -32,7 +33,11 @@ export default class App extends React.Component {
         </AppContext.Provider>
         )
       case 'review-cards':
-        return <ReviewCards />;
+        return (
+          <AppContext.Provider value={this.state.activeCard}>
+            <ReviewCards />
+          </AppContext.Provider>
+        )
       case 'view-cards':
         return (
           <AppContext.Provider value={this.state.cards}>
