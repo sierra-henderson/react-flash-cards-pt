@@ -9,9 +9,14 @@ const AppContext = React.createContext()
 export default class App extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { view: 'view-cards' }
+    this.state = {
+      view: 'view-cards',
+      cards: localStorage.getItem('flash-cards') ? JSON.parse(localStorage.getItem('flash-cards')) : []
+    }
     this.setView = this.setView.bind(this)
     this.getView = this.getView.bind(this)
+    this.addCard = this.addCard.bind(this)
+    this.saveCards = this.saveCards.bind(this)
   }
 
   setView(view) {
@@ -21,7 +26,11 @@ export default class App extends React.Component {
   getView() {
     switch(this.state.view) {
       case 'create-card':
-        return <CreateCard />;
+        return (
+        <AppContext.Provider value={{addCard: this.addCard, setView: this.setView}}>
+          <CreateCard />;
+        </AppContext.Provider>
+        )
       case 'review-cards':
         return <ReviewCards />;
       case 'view-cards':
@@ -31,14 +40,26 @@ export default class App extends React.Component {
     }
   }
 
+  saveCards() {
+    const cardsString = JSON.stringify(this.state.cards)
+    localStorage.setItem('flash-cards', cardsString)
+  }
+
+  addCard(card) {
+    this.setState({
+      cards: this.state.cards.concat([card])
+    }, this.saveCards)
+  }
+
   render() {
+    console.log("Cards from App:", this.state.cards)
     return (
-      <AppContext.Provider value={this.state.view}>
         <div>
           <Nav setView={this.setView} />
           {this.getView()}
         </div>
-      </AppContext.Provider>
     )
   }
 }
+
+export { AppContext }
