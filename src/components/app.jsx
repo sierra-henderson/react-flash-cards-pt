@@ -26,7 +26,7 @@ export default class App extends React.Component {
     switch(this.state.view) {
       case 'create-card':
         return (
-        <AppContext.Provider value={this.addCard}>
+        <AppContext.Provider value={{addCard: this.addCard, setView: this.setView}}>
           <CreateCard />;
         </AppContext.Provider>
         )
@@ -51,7 +51,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.cards)
+    console.log("Cards from App:", this.state.cards)
     return (
         <div>
           <Nav setView={this.setView} />

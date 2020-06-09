@@ -9,14 +9,28 @@ export default class CreateCards extends React.Component {
       answerValue: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleQuestionChange = this.handleQuestionChange.bind(this)
+    this.handleAnswerChange = this.handleAnswerChange.bind(this)
+    this.handleReset = this.handleReset.bind(this)
   }
 
-  handleSubmit(callback) {
+  handleSubmit(callback, callbackTwo) {
+    event.preventDefault();
     const flashcardObj = {
       question: this.state.questionValue,
       answer: this.state.answerValue
     }
     callback(flashcardObj)
+    this.handleReset(callbackTwo)
+  }
+
+  handleReset(callback) {
+    event.preventDefault()
+    this.setState({
+      questionValue: '',
+      answerValue: ''
+    })
+    callback('view-cards')
   }
 
   handleQuestionChange() {
@@ -30,22 +44,24 @@ export default class CreateCards extends React.Component {
   render() {
     return (
       <AppContext.Consumer>
-        {this.addCard => (
-        <h1 className="text-center">Create New Card</h1>
-        <form>
-          <div class="form-group">
-            <label for="question">Question</label>
-            <textarea class="form-control" id="question" rows="3" value={this.state.questionValue} onChange={this.handleQuestionChange}></textarea>
-          </div>
-          <div class="form-group">
-            <label for="answer">Answer</label>
-            <textarea class="form-control" id="answer" rows="3" value={this.state.answerValue} onChange={this.handleAnswerChange}></textarea>
-          </div>
-          <div className="justify-content-end">
-            <button type="reset" class="btn btn-outline-danger">Cancel</button>
-            <button type="submit" class="btn btn-outline-primary" onClick={() => this.handleSubmit(this.addCard)}>Save Card</button>
-          </div>
-        </form>
+        {value => (
+        <div className="container">
+            <h1 className="text-center">Create New Card</h1>
+            <form onSubmit={() => this.handleSubmit(value.addCard, value.setView)}>
+              <div className="form-group">
+                <label htmlFor="question">Question</label>
+                <textarea className="form-control" id="question" rows="3" value={this.state.questionValue} onChange={this.handleQuestionChange}></textarea>
+              </div>
+              <div className="form-group">
+                <label htmlFor="answer">Answer</label>
+                <textarea className="form-control" id="answer" rows="3" value={this.state.answerValue} onChange={this.handleAnswerChange}></textarea>
+              </div>
+              <div className="justify-content-end">
+                <button type="reset" className="btn btn-outline-danger" onClick={() => this.handleReset(value.setView)}>Cancel</button>
+                <button type="submit" className="btn btn-outline-primary ml-2">Save Card</button>
+              </div>
+            </form>
+        </div>
         )}
       </AppContext.Consumer>
     )
