@@ -12,12 +12,13 @@ export default class App extends React.Component {
     this.state = {
       view: 'view-cards',
       cards: localStorage.getItem('flash-cards') ? JSON.parse(localStorage.getItem('flash-cards')) : [],
-      activeCard: this.state.cards[0]
+      activeCard: null
     }
     this.setView = this.setView.bind(this)
     this.getView = this.getView.bind(this)
     this.addCard = this.addCard.bind(this)
     this.saveCards = this.saveCards.bind(this)
+    this.setActiveCard = this.setActiveCard.bind(this)
   }
 
   setView(view) {
@@ -40,13 +41,19 @@ export default class App extends React.Component {
         )
       case 'view-cards':
         return (
-          <AppContext.Provider value={this.state.cards}>
+          <AppContext.Provider value={cards: this.state.cards, setActiveCard: this.setActiveCard}>
             <ViewCards />
           </AppContext.Provider>
         )
       default:
         return null;
     }
+  }
+
+  setActiveCard(index) {
+    this.setState({
+      activeCard: this.state.cards[index]
+    })
   }
 
   saveCards() {
