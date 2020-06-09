@@ -11,11 +11,12 @@ export default class App extends React.Component {
     super(props)
     this.state = {
       view: 'view-cards',
-      cards: []
+      cards: localStorage.getItem('flash-cards') ? JSON.parse(localStorage.getItem('flash-cards')) : []
     }
     this.setView = this.setView.bind(this)
     this.getView = this.getView.bind(this)
     this.addCard = this.addCard.bind(this)
+    this.saveCards = this.saveCards.bind(this)
   }
 
   setView(view) {
