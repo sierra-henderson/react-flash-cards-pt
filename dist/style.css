@@ -1,0 +1,25 @@
+.basic-modal {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 90;
+}
+
+.basic-modal-content {
+  position: absolute;
+  padding: 20px;
+  width: 600px;
+  z-index: 100;
+  background-color: white;
+  border-radius: 0.7rem;
+}
+
+.basic-modal-content p, .basic-modal-content h3 {
+  text-align: center;
+}
