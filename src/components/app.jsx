@@ -3,8 +3,7 @@ import ViewCards from './view-cards'
 import ReviewCards from './review-cards'
 import CreateCard from './create-card'
 import Nav from './nav'
-
-const AppContext = React.createContext()
+import { AppContext } from './context'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -12,7 +11,7 @@ export default class App extends React.Component {
     this.state = {
       view: 'view-cards',
       cards: localStorage.getItem('flash-cards') ? JSON.parse(localStorage.getItem('flash-cards')) : [],
-      activeCard: null
+      activeCard: 0
     }
     this.setView = this.setView.bind(this)
     this.getView = this.getView.bind(this)
