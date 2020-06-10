@@ -21,6 +21,9 @@ export default class ViewCards extends React.Component {
                         <h5 className="card-title text-light">Answer</h5>
                         <p className="text-white">{card.answer}</p>
                       </div>
+                      <div className="card-body bg-dark d-flex justify-content-center">
+                        <i className="text-light far fa-trash-alt fa-lg"></i>
+                      </div>
                     </div>
                   )
                 })
