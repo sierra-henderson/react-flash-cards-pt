@@ -13,9 +13,7 @@ export default class ViewCards extends React.Component {
   }
 
   open(i) {
-    console.log("index:", i)
     this.props.setActiveCard(i)
-    console.log("dsflk", this.context.activeCard)
     this.setState({ isOpen: true });
   }
 
