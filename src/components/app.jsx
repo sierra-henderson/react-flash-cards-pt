@@ -3,20 +3,21 @@ import ViewCards from './view-cards'
 import ReviewCards from './review-cards'
 import CreateCard from './create-card'
 import Nav from './nav'
-
-const AppContext = React.createContext()
+import { AppContext } from './context'
 
 export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       view: 'view-cards',
-      cards: localStorage.getItem('flash-cards') ? JSON.parse(localStorage.getItem('flash-cards')) : []
+      cards: localStorage.getItem('flash-cards') ? JSON.parse(localStorage.getItem('flash-cards')) : [],
+      activeCard: 0
     }
     this.setView = this.setView.bind(this)
     this.getView = this.getView.bind(this)
     this.addCard = this.addCard.bind(this)
     this.saveCards = this.saveCards.bind(this)
+    this.setActiveCard = this.setActiveCard.bind(this)
   }
 
   setView(view) {
@@ -32,7 +33,11 @@ export default class App extends React.Component {
         </AppContext.Provider>
         )
       case 'review-cards':
-        return <ReviewCards />;
+        return (
+          <AppContext.Provider value={{activeCard: this.state.activeCard, cards: this.state.cards}}>
+            <ReviewCards setActiveCard={this.setActiveCard}/>
+          </AppContext.Provider>
+        )
       case 'view-cards':
         return (
           <AppContext.Provider value={this.state.cards}>
@@ -42,6 +47,12 @@ export default class App extends React.Component {
       default:
         return null;
     }
+  }
+
+  setActiveCard(index) {
+    this.setState({
+      activeCard: this.state.cards[index]
+    })
   }
 
   saveCards() {

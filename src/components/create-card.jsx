@@ -1,5 +1,5 @@
 import React from 'react'
-import { AppContext } from './app'
+import { AppContext } from './context'
 
 export default class CreateCards extends React.Component {
   constructor(props) {
